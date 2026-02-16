@@ -1,3 +1,5 @@
+#WIDGET URL : https://github.com/rajanpatil23/MendixTimesheetWidget/blob/main/Rajan.TimeSheetCalendar.mpk
+
 # TimeSheet Calendar Widget
 
 A powerful and flexible Mendix widget for managing timesheet entries in a calendar view. Built for project-based time tracking with an intuitive weekly grid interface.
