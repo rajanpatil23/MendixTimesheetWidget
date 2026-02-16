@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="Rajan.timesheetcalendar.TimeSheetCalendar" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Timesheet Calendar</name>
+    <description>A configurable calendar for timesheet entry with project rows and date columns</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="Data Sources">
+            <property key="projectsDataSource" type="datasource" isList="true" required="false">
+                <caption>Projects Data Source</caption>
+                <description>Data source for the list of projects</description>
+            </property>
+            <property key="timesheetDataSource" type="datasource" isList="true" required="false">
+                <caption>Timesheet Entries Data Source</caption>
+                <description>Data source for timesheet entries</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Project Attributes">
+            <property key="projectNameAttr" type="attribute" dataSource="projectsDataSource" required="false">
+                <caption>Project Name</caption>
+                <description>Attribute containing the project name</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="projectIdAttr" type="attribute" dataSource="projectsDataSource" required="false">
+                <caption>Project ID</caption>
+                <description>Attribute containing the project identifier</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Timesheet Entry Attributes">
+            <property key="entryProjectIdAttr" type="attribute" dataSource="timesheetDataSource" required="false">
+                <caption>Entry Project ID</caption>
+                <description>Attribute linking entry to project</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                </attributeTypes>
+            </property>
+            <property key="entryDateAttr" type="attribute" dataSource="timesheetDataSource" required="false">
+                <caption>Entry Date</caption>
+                <description>Attribute containing the entry date</description>
+                <attributeTypes>
+                    <attributeType name="DateTime"/>
+                </attributeTypes>
+            </property>
+            <property key="entryHoursAttr" type="attribute" dataSource="timesheetDataSource" required="false">
+                <caption>Entry Hours</caption>
+                <description>Attribute containing the hours worked</description>
+                <attributeTypes>
+                    <attributeType name="Decimal"/>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Helper Entity Configuration">
+            <property key="helperEntityName" type="string" required="true">
+                <caption>Helper Entity Name</caption>
+                <description>Full entity name (e.g., MyModule.TimesheetHelper) - must be a persistent entity with Date, Hours, and ProjectID attributes</description>
+            </property>
+            <property key="helperDateAttrName" type="string" required="true">
+                <caption>Helper Date Attribute Name</caption>
+                <description>Name of the DateTime attribute on helper entity (e.g., Date)</description>
+            </property>
+            <property key="helperHoursAttrName" type="string" required="true">
+                <caption>Helper Hours Attribute Name</caption>
+                <description>Name of the Decimal/Integer attribute on helper entity (e.g., Hours)</description>
+            </property>
+            <property key="helperProjectIdAttrName" type="string" required="true">
+                <caption>Helper Project ID Attribute Name</caption>
+                <description>Name of the String attribute on helper entity (e.g., ProjectID)</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Actions">
+            <property key="onCellChangeAction" type="action" required="false" dataSource="projectsDataSource">
+                <caption>On Cell Change Action</caption>
+                <description>Action (microflow/nanoflow) triggered when a cell value changes. Receives the Project object as parameter. Retrieve TimesheetHelper entity in nanoflow to get date, hours, and project ID.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Configuration">
+            <property key="startDate" type="expression" defaultValue="'[%BeginOfCurrentWeek%]'">
+                <caption>Start Date</caption>
+                <description>Start date for the calendar view</description>
+                <returnType type="DateTime"/>
+            </property>
+            <property key="numberOfDays" type="integer" defaultValue="7">
+                <caption>Number of Days</caption>
+                <description>Number of days to display (default: 7 for one week)</description>
+            </property>
+            <property key="showWeekends" type="boolean" defaultValue="true">
+                <caption>Show Weekends</caption>
+                <description>Include Saturday and Sunday in the calendar</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Display Options">
+            <property key="showTotals" type="boolean" defaultValue="true">
+                <caption>Show Row Totals</caption>
+                <description>Display total hours per project</description>
+            </property>
+            <property key="showDailyTotals" type="boolean" defaultValue="true">
+                <caption>Show Daily Totals</caption>
+                <description>Display total hours per day</description>
+            </property>
+            <property key="editable" type="boolean" defaultValue="true">
+                <caption>Editable</caption>
+                <description>Allow users to edit timesheet entries</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
